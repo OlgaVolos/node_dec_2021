@@ -1,0 +1,2 @@
+helloNew hello 
+Text data with promise 
