@@ -110,6 +110,11 @@ app.put('/users/:userId', async (req, res) => {
 
     const updatedUser = Object.assign(users[index], req.body);
 
+    // const updatedUser = {...users[index], ...req.body};
+    // users.splice(index, 1);
+    // await fileService.writer([...users, updatedUser]);
+    // працює і без цього, але хай тут буде
+
     await fileService.writer([...users]);
 
     res.status(201).json(updatedUser);
@@ -120,4 +125,5 @@ app.listen(5000, () => {
 })
 
 //всі перевірки потрібно робити до того, як ми стукаємося в базу даних
-// Object.assign допомагає нам зліпити до купи нового юзера. Присвоює нові дані у вхідний об"єкт, не порушуючи структури вхідних даних
+// Object.assign допомагає нам зліпити до купи нового юзера.
+// Присвоює нові дані у вхідний об"єкт, не порушуючи структури вхідних даних
