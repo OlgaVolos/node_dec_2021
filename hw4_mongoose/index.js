@@ -1,8 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const userRouter = require("./routes/user.router");
+const {config} = require("./configs");
+const {userRouter} = require("./routes");
 
-mongoose.connect('mongodb://localhost:27017/december2021')
+mongoose.connect(config.MONGO_URL);
 
 const app = express();
 
@@ -21,9 +22,11 @@ app.use((err, req, res, next) => {
             error: err.message || 'Unknown Error',
             code: err.status || 500
         });
-})
+});
 
 
-app.listen(5000, () => {
-    console.log("Started on a port 5000")
+
+
+app.listen(config.PORT, () => {
+    console.log(`Started on a port ${config.PORT}`)
 })

@@ -64,6 +64,7 @@ module.exports = {
                 return next(new CustomError('Set valid age'))
             }
 
+            req.dateForUpdate = {name, age}; // що би не прокидалося в запиті, будуть оновлюватися лише вказані тут поля
             next();
         } catch (e) {
             next(e);

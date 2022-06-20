@@ -1,30 +1,30 @@
-const userRouter = require('express').Router();
+const router = require('express').Router();
 
 const {userController} = require("../controllers");
 const {commonMiddleware, userMiddleware} = require("../middlewares");
 
 
-userRouter.get('/',
+router.get('/',
     userController.getAllUsers);
-userRouter.post('/',
+router.post('/',
     userMiddleware.isUserValidForCreate,
     userMiddleware.isUserUnique,
     userController.createUser);
 
-userRouter.get('/:id',
+router.get('/:id',
     commonMiddleware.isIdValid,
     userMiddleware.isUserExist,
     userController.getUserById);
-userRouter.put('/:id',
+router.put('/:id',
     commonMiddleware.isIdValid,
     userMiddleware.isUserValidForUpdate,
     userMiddleware.isUserExist,
     userController.updateUserById);
-userRouter.delete('/:id',
+router.delete('/:id',
     commonMiddleware.isIdValid,
     userMiddleware.isUserExist,
     userController.deleteUserById);
 
-module.exports = userRouter;
+module.exports = router;
 
 // всі валідації, що ми робимо без запитів, ми робимо раніше
