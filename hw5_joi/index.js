@@ -1,15 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
-const {config} = require("./configs");
-const {userRouter} = require("./routes");
+const {config} = require("../hw4_mongoose/configs");
+const {userRouter} = require("./routers");
 
 mongoose.connect(config.MONGO_URL);
 
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({extended: true}));
 
 app.use('/users', userRouter);
 app.use('*', (req, res) => {
@@ -26,8 +25,6 @@ app.use((err, req, res, next) => {
 });
 
 
-
-
 app.listen(config.PORT, () => {
-    console.log(`Started on a port ${config.PORT}`)
-})
+    console.log(`Server started on port ${config.PORT}`);
+});
