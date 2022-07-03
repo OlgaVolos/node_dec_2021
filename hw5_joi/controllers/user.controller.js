@@ -9,8 +9,7 @@ module.exports = {
             // Якщо це масив, то він стане нормальним масивом, а не монго-масивом
                 const userForResponse = users.map(u => userPresenter(u));
                 res.json(userForResponse);
-
-            res.json(users);
+            // res.json(users) // цього не треба, бо є вище
         } catch (e) {
             next(e);
         }

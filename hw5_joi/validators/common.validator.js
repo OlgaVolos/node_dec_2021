@@ -1,4 +1,5 @@
 const Joi = require('joi');
+
 const {EMAIL_REGEX, PASSWORD_REGEX} = require("../configs/constants");
 
 module.exports = {
