@@ -2,8 +2,8 @@ const {Schema, model} = require('mongoose');
 
 const OAuthSchema = new Schema({
     userId: {
-        type: Schema.Types.ObjectId, //посилання на ід юзера
-        ref: 'user', // посилання до таблички, з якою зв"язуємося
+        type: Schema.Types.ObjectId,
+        ref: 'user',
         required: true
     },
 
@@ -14,7 +14,7 @@ const OAuthSchema = new Schema({
 
     refresh_token: {
         type: String,
-        required: true
+        required: true,
     },
 }, {timestamps: true});
 

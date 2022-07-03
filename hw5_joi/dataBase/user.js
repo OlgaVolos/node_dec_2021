@@ -3,19 +3,19 @@ const {Schema, model} = require('mongoose');
 const UserSchema = new Schema({
     name: {
         type: String,
-        require: true,
+        required: true,
         trim: true
     },
     email:{
         type: String,
         // unique: true, // можна не писати, бо ми валідуємо в joi
-        require: true,
+        required: true,
         trim: true,
         // lowercase: true //можна не писати, бо ми валідуємо в joi
     },
     password: {
         type: String,
-        require: true,
+        required: true,
     },
     age:{
         type: Number
