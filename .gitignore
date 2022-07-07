@@ -2,3 +2,7 @@
 
 # Project exclude paths
 /node_modules/
+.env
+/**/environments/*.env
+
+
