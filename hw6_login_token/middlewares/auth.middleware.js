@@ -41,8 +41,6 @@ module.exports = {
             }
             authService.checkToken(refresh_token, tokenTypesEnum.REFRESH);
 
-            console.log(refresh_token);
-
             const tokenInfo = await OAuth.findOne({refresh_token});
 
             if (!tokenInfo) {

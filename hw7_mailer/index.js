@@ -1,8 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require("path");
+
+require('dotenv').config({ path: path.join(__dirname, 'environments', `${process.env.MODE}.env` ) }); // в наступній домашці в package.json змінити ім"я папки.
+// якщо би все було в окремому файлі, без розгалужень, то ми б писали
+// require('dotenv').config({ path: path.join(process.cwd(), 'environments', `${process.env.MODE}.env` ) }); // в наступній домашці в package.json змінити ім"я папки.
 
 const {config} = require("./configs");
-const {userRouter} = require("./routes");
+const {userRouter, authRouter} = require("./routes");
 
 mongoose.connect(config.MONGO_URL);
 
@@ -11,7 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-// app.use('/auth', authRouter);
+app.use('/auth', authRouter);
 app.use('/users', userRouter);
 
 app.use('*', (req, res) => {

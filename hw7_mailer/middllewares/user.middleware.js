@@ -24,11 +24,12 @@ module.exports = {
         try {
             const {email} = req.body;
 
-            const user = userService.findOneUser({email});
-            if (user) {
+            const userWithEmail = await userService.findOneUser({email});
+
+            if (userWithEmail) {
                 return next(new CustomError(`User with email ${email} is already exist`, 409));
             }
-            req.user = user;
+            req.user = userWithEmail;
             next();
         } catch (e) {
             next(e);
