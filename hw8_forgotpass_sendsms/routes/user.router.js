@@ -1,6 +1,7 @@
+const router = require('express').Router();
+
 const {commonMiddleware, userMiddleware} = require("../middlewares");
 const {userControllers} = require("../controllers");
-const router = require('express').Router();
 
 router.get('/',
     userControllers.getAllUsers);

@@ -1,5 +1,8 @@
-const {userService} = require("../services");
+const {userService, passwordService, emailService, smsService} = require("../services");
 const {userPresenter} = require("../presenters/user.presenter");
+const {emailActionTypesEnum, smsActionTypesEnum} = require("../enums");
+const {smsTemplateBuilder} = require("../sms-templates");
+
 module.exports = {
     getAllUsers: async (req, res, next) => {
         try {
@@ -25,13 +28,22 @@ module.exports = {
         }catch (e) {
             next(e);
         }
-    }, //TODO: запитати про сервіс
+    },
 
     createNewUser: async (req, res, next) => {
         try {
-            const {email, password, name} = req.body;
+            const {email, password, name, phone} = req.body;
 
-            const newUser = await userService.createUser({...req.body});
+            const hash = await passwordService.hashPassword(password);
+
+            const newUser = await userService.createUser({...req.body, password: hash});
+
+            // const newUser = await userService.createWithHashPassword(req.body); // UserSchema.statics, тоді самого hash нам не треба
+
+            const sms = smsTemplateBuilder[smsActionTypesEnum.WELCOME](name);
+
+            await smsService.sendSMS(phone, sms)
+            await emailService.sendMail(email, emailActionTypesEnum.WELCOME, {name});
 
             const userForResponse = userPresenter(newUser);
 
