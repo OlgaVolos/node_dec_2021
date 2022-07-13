@@ -37,7 +37,9 @@ module.exports = {
 
 
         context.frontendURL = config.FRONTEND_URL;
+
         console.info(`Email start sending. action: ${emailAction}, email: ${userMail}`)
+
         return transporter.sendMail({
             to: userMail,
             subject: templateInfo.subject,

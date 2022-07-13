@@ -1,6 +1,7 @@
 const {passwordService, authService, emailService} = require("../services");
 const {OAuth} = require("../dataBase");
 const {emailActionTypesEnum} = require("../enums");
+
 module.exports = {
     login: async (req, res, next) => {
         try {
@@ -72,7 +73,7 @@ module.exports = {
 
     forgotPassword: async (req, res, next) => {
         try {
-            const {name, email} = req.user
+            const {name, email} = req.user;
 
             await emailService.sendMail(email, emailActionTypesEnum.FORGOT_PASSWORD, {name});
 

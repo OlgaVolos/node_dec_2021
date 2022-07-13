@@ -4,22 +4,22 @@ const UserSchema = new Schema({
     name: {
         type: String,
         trim: true,
-        required: true
+        // required: true
     },
     age: {
         type: Number,
-        required: true,
+        // required: true,
     },
     email: {
         type: String,
         trim: true,
-        required: true,
-        lowercase: true,
-        unique: true
+        // required: true,
+        // lowercase: true,
+        // unique: true
     },
     password: {
         type: String,
-        required: true
+        // required: true
     }
 
 }, {timestamps: true}); // показує створення та апдейт

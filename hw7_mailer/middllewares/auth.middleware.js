@@ -10,13 +10,13 @@ module.exports = {
 
     checkAccessToken: async (req, res, next) => {
         try {
-            const access_token = req.get(constants.AUTHORIZATION);
-            if (!access_token) {
+            const authToken = req.get(constants.AUTHORIZATION);
+            if (!authToken) {
                 return next(new CustomError('No token', 401))
             }
-            authService.checkToken(access_token); // перевірка,чи адекватний токен
+            authService.checkToken(authToken); // перевірка,чи адекватний токен
 
-            const tokenInfo = await OAuth.findOne({access_token}).populate('userId') //поєднує з відповідною базою
+            const tokenInfo = await OAuth.findOne({access_token: authToken}).populate('userId') //поєднує з відповідною базою
 
             if (!tokenInfo) {
                 return next(new CustomError('Token not valid', 401))

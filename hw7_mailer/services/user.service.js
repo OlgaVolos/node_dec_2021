@@ -11,7 +11,7 @@ module.exports = {
     createUser: (user) => {
         return User.create(user);
     },
-    updateUser: (params, userData, options = {new:true}) => {
+    updateUser: (params, userData, options = {new: true}) => {
         return User.findOneAndUpdate(params, userData, options);
     },
     deleteById: (params) => {
