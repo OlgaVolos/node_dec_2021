@@ -19,4 +19,5 @@ router.post('/logout',
 router.post('/logoutAllDevices',
     authMiddleware.checkAccessToken,
     authController.logoutAllDevices);
+
 module.exports = router;

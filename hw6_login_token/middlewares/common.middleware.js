@@ -8,6 +8,7 @@ module.exports = {
             const {id} = req.params;
 
             const isValid = Types.ObjectId.isValid(id);
+
             if(!isValid){
                 return next(new CustomError('Not valid id'))
             }

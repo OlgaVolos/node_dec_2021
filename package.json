@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "set MODE=dev&& nodemon ./hw8_forgotpass_sendsms",
+    "start:dev": "set MODE=dev&& nodemon ./",
     "start:prod": "set MODE=prod&& node ."
   },
   "keywords": [],
@@ -19,7 +19,8 @@
     "mongoose": "^6.4.0",
     "nodemailer": "^6.7.6",
     "nodemailer-express-handlebars": "^5.0.0",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "twilio": "^3.78.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.3"

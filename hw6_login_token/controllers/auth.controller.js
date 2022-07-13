@@ -29,7 +29,7 @@ module.exports = {
         try {
             const {userId, refresh_token} = req.tokenInfo;
 
-            await OAuth.deleteOne({refresh_token})
+            await OAuth.deleteOne({refresh_token});
 
             const tokens = authService.generateAuthToken();
 
