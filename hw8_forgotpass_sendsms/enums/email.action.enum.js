@@ -4,4 +4,5 @@ module.exports = {
     WELCOME: 'WELCOME',
     USER_BANNED: 'USER_BANNED',
     LOGOUT: 'LOGOUT',
-}
+};
+

@@ -46,7 +46,5 @@ module.exports = {
             template: templateInfo.template,
             context
         })
-
-
     }
 }
