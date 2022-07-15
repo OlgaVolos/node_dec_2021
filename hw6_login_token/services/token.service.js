@@ -24,7 +24,7 @@ module.exports = {
 
             return jwt.verify(token, secret);
         } catch (e) {
-            return new CustomError('Token not valid', 401);
+            throw new CustomError('Token not valid', 401);
         }
     } // сервыси зазвичай в трай-кетч не огортаються, але тут треба, бо потрібно вернути правильну помилку
 };

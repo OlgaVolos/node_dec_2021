@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "set MODE=dev&& nodemon ./",
+    "start:dev": "set MODE=dev&& nodemon ./hw9_aws_s3",
     "start:prod": "set MODE=prod&& node ."
   },
   "keywords": [],
