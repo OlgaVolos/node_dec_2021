@@ -24,7 +24,7 @@ module.exports = {
             return jsonwebtoken.verify(token, secret);
 
         } catch (e) {
-            return new CustomError('Token not valid', 401)
+            throw new CustomError('Token not valid', 401)
         }
     }
 }
