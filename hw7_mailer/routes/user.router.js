@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const {userController} = require("../controllers");
-const {userMiddleware, commonMiddleware} = require("../middllewares");
+const {userMiddleware, commonMiddleware, authMiddleware} = require("../middllewares");
 
 router.get('/',
     userController.getAllUsers);
@@ -19,12 +19,14 @@ router.get('/:id',
 
 router.put('/:id',
     commonMiddleware.isIdValid,
+    authMiddleware.checkAccessToken, // беремо на всі закриті ендпоінти, на які може переходити лише користувач
     userMiddleware.isUpdatedUserValid,
     userMiddleware.isUserPresent,
     userController.updateUser);
 
 router.delete('/:id',
     commonMiddleware.isIdValid,
+    authMiddleware.checkAccessToken, // беремо на всі закриті ендпоінти, на які може переходити лише користувач
     userMiddleware.isUserPresent,
     userController.deleteUser);
 
