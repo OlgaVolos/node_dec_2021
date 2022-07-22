@@ -1,5 +1,5 @@
 const {Schema, model} = require('mongoose');
-const {passwordService} = require("../services");
+const {passwordService} = require("../services/password.service");
 
 const UserSchema = new Schema({
     name: {
