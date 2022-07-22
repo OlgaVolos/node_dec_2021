@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
     "start:dev": "set MODE=dev&& nodemon .",
     "start:prod": "set MODE=prod&& node ."
   },
