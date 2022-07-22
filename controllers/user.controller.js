@@ -21,7 +21,7 @@ module.exports = {
 
     getUserById: async (req, res, next) => {
         try {
-            const {user} = req.user;
+            const {user} = req;
 
             const userForResponse = userPresenter(user);
 
