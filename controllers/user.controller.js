@@ -42,7 +42,7 @@ module.exports = {
 
             const {Location} = await uploadFile(req.files.avatar, 'user', user._id);
 
-            const userWithPhoto = await User.findByIdAndUpdate({_id: user._id}, {avatar: Location}, {new: true})
+            const userWithPhoto = await User.findByIdAndUpdate({_id: user._id}, {avatar: Location}, {new: true});
 
             const sms = smsTemplateBuilder[smsActionTypesEnum.WELCOME](name); //витягаємо з темплейтів
 
