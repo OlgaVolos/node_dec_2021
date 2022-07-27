@@ -8,7 +8,7 @@ const {User} = require("../dataBase"); // це фуункція, тому так
 module.exports = {
     getAll: async (req, res, next) => {
         try {
-            const users = await userService.findAll().exec();
+            const users = await userService.getAllWithPagination(req.query).exec();
 
             const userForResponse = users.map(u => userPresenter(u));
 
