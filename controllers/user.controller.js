@@ -8,11 +8,14 @@ const {User} = require("../dataBase"); // це фуункція, тому так
 module.exports = {
     getAll: async (req, res, next) => {
         try {
-            const users = await userService.getAllWithPagination(req.query).exec();
+            // const users = await userService.getAllWithPagination(req.query).exec();
+            const users = await userService.getAllWithPagination(req.query);
 
-            const userForResponse = users.map(u => userPresenter(u));
+            // const userForResponse = users.map(u => userPresenter(u));
 
-            res.json(userForResponse);
+            // res.json(userForResponse);
+            res.json(users);
+
 
         } catch (e) {
             next(e);

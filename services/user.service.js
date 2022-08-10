@@ -7,12 +7,11 @@ module.exports = {
     getAllWithPagination: async (query = {}) => {
 
         const {page=1, perPage = 5, ...otherFilters} = query;
+        const skip = (page-1) * perPage; // 0 на першій сторінці
 
         // perPage скільки ітемів на сторінку
 
         const filterQuery = _getUserFilterQuery(otherFilters);
-
-        const skip = (page-1) * perPage; // 0 на першій сторінці
 
         const users = await User.find(filterQuery).skip(skip).limit(perPage);
         const userCount = await User.countDocuments(filterQuery);
@@ -39,33 +38,32 @@ module.exports = {
     },
 };
 
-function _getUserFilterQuery(otherFilters) {
+function _getUserFilterQuery(filters) {
     const searchObject = {};
 
-    if(otherFilters.search) {
+    if(filters.search) {
         Object.assign(searchObject, {
             $or: [
-                {name: {$regex: otherFilters.search, options: 'i'}},
-                {email: {$regex: otherFilters.search, options: 'i'}}
+                {name: {$regex: filters.search, $options: 'i'}},
+                {email: {$regex: filters.search, $options: 'i'}}
             ]
-        })
+        }) //об"єднання фільтру пошуку імені та/або мейла
     }
 
-    if(otherFilters.ageGte) {
+    if(filters.ageGte) {
         Object.assign(searchObject, {
-            age: {$gte: +otherFilters.ageGte}
+            age: {$gte: +filters.ageGte}
         })
     }
 
-    if(otherFilters.ageLte) {
+    if(filters.ageLte) {
         Object.assign(searchObject, {
             age: {
                 ...searchObject.age || {},
-                $lte: +otherFilters.ageLte
+                $lte: +filters.ageLte
             }
         }) // цей запис дасть нам змогу додати ще одне поле age, не перетерши попереднє
     }
-    console.log(JSON.stringify((searchObject, null, 2)));
 
-    return otherFilters
+    return searchObject
 }
