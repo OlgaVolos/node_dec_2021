@@ -1,0 +1,669 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "december-2021"
+  },
+  "paths": {
+    "/users": {
+      "get": {
+        "description": "Get all users",
+        "tags": [
+          "Users"
+        ],
+        "operationId": "getAllUsers",
+        "parameters": [
+          {
+            "type": "number",
+            "in": "query",
+            "name": "page",
+            "default": 1,
+            "description": "Page Number"
+          },
+          {
+            "type": "number",
+            "in": "query",
+            "name": "perPage",
+            "default": 5,
+            "required": true,
+            "description": "itemPerPage"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "search",
+            "description": "Search string"
+          },
+          {
+            "type": "number",
+            "in": "query",
+            "name": "ageGte",
+            "description": "ageGte"
+          },
+          {
+            "type": "number",
+            "in": "query",
+            "name": "ageLte",
+            "description": "ageLte"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "properties": {
+                "page": {
+                  "type": "number",
+                  "example": 1
+                },
+                "perPage": {
+                  "type": "number",
+                  "example": 3
+                },
+                "count": {
+                  "type": "number",
+                  "example": 10
+                },
+                "data": {
+                  "items": {
+                    "$ref": "#/definitions/User"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "something goes wrong"
+                }
+              }
+            },
+            "description": "some error"
+          }
+        }
+      },
+      "post": {
+        "description": "Create User",
+        "tags": [
+          "Users"
+        ],
+        "operationId": "create user",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "formData",
+            "name": "name",
+            "required": true,
+            "description": "User's name"
+          },
+          {
+            "type": "number",
+            "in": "formData",
+            "name": "age",
+            "required": false,
+            "description": "User's age"
+          },
+          {
+            "type": "string",
+            "in": "formData",
+            "name": "email",
+            "required": true,
+            "description": "User's email"
+          },
+          {
+            "type": "string",
+            "in": "formData",
+            "name": "phone",
+            "required": true,
+            "description": "User's phone"
+          },
+          {
+            "type": "string",
+            "in": "formData",
+            "name": "password",
+            "required": true,
+            "description": "Password"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "something goes wrong"
+                }
+              }
+            },
+            "description": "Some error"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "description": "Get user by id",
+        "tags": [
+          "Users"
+        ],
+        "operationId": "getById",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "User Id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "something goes wrong"
+                }
+              }
+            },
+            "description": "some error"
+          },
+          "404": {
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 404
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User not found"
+                }
+              }
+            },
+            "description": "User not found"
+          }
+        }
+      },
+      "put": {
+        "description": "Update User By Id",
+        "tags": ["Users"],
+        "operationId": "update",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "path",
+            "name": "id",
+            "description": "user's id for update",
+            "required": true
+          },
+          {
+            "type": "string",
+            "in": "formData",
+            "name": "name",
+            "required": true
+          },
+          {
+            "type": "number",
+            "in": "formData",
+            "name": "age",
+            "required": false
+          },
+          {
+            "type": "string",
+            "in": "formData",
+            "name": "phone",
+            "required": false
+          },
+          {
+            "type": "string",
+            "in": "formData",
+            "name": "password",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "something goes wrong"
+                }
+              }
+            },
+            "description": "some error"
+          },
+          "404": {
+            "schema": {
+              "properties": {
+                "code":{
+                  "type": "string",
+                  "example": "User not found"
+                }
+              }
+            },
+            "description": "User not found"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete user by id",
+        "tags": [
+          "Users"
+        ],
+        "operationId": "delete",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "User id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "400": {
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "something goes wrong"
+                }
+              }
+            },
+            "description": "some error"
+          },
+          "404": {
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "example": "User not found"
+                }
+              }
+            },
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "description": "Login User",
+        "tags": ["Auth"],
+        "operationId": "login",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "formData",
+            "name": "email",
+            "required": true
+          },
+          {
+            "type": "string",
+            "in": "formData",
+            "name": "password",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "Ok",
+            "schema": {
+              "properties": {
+                "user": {
+                  "$ref": "#/definitions/User"
+                },
+                "access_token": {
+                  "type": "string",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTc5MTgwNzgsImV4cCI6MTY1NzkxODk3OH0.bTkpyIDAcWpkpRiYaMrOX_xBvOlj58c8EEfLdCkxvlE"
+                },
+                "refresh_token": {
+                  "type": "string",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTc5MTgwNzgsImV4cCI6MTY1NzkxODk3OH0.bTkpyIDAcWpkpRiYaMrOX_xBvOlj58c8EEfLdCkxvlE"
+                }
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "something goes wrong"
+                }
+              }
+            },
+            "description": "some error"
+          }
+        }
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "description": "Refresh token",
+        "tags": [
+          "Auth"
+        ],
+        "operationId": "refreshToken",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "header",
+            "name": "refresh_token",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "properties": {
+                "access_token": {
+                  "type": "string",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTc5MTgwNzgsImV4cCI6MTY1NzkxODk3OH0.bTkpyIDAcWpkpRiYaMrOX_xBvOlj58c8EEfLdCkxvlE"
+                },
+                "refresh_token": {
+                  "type": "string",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTc5MTgwNzgsImV4cCI6MTY1NzkxODk3OH0.bTkpyIDAcWpkpRiYaMrOX_xBvOlj58c8EEfLdCkxvlE"
+                }
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "something goes wrong"
+                }
+              }
+            },
+            "description": "some error"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "description": "Logout user",
+        "tags": [
+          "Auth"
+        ],
+        "operationId": "logout",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "header",
+            "name": "access_token",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "400": {
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "something goes wrong"
+                }
+              }
+            },
+            "description": "some error"
+          },
+          "401": {
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Token not valid"
+                }
+              }
+            },
+            "description": "Token not valid"
+          }
+        }
+      }
+    },
+    "/auth/logoutAllDevices": {
+      "post": {
+        "description": "Logout all devices",
+        "tags": [
+          "Auth"
+        ],
+        "operationId": "logoutAllDevices",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "header",
+            "name": "access_token",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "400": {
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "something goes wrong"
+                }
+              }
+            },
+            "description": "some error"
+          },
+          "401": {
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Token not valid"
+                }
+              }
+            },
+            "description": "Token not valid"
+          }
+        }
+      }
+    },
+    "/auth/forgotPassword": {
+      "post": {
+        "description": "Forgot password",
+        "tags": ["Auth"],
+        "operationId": "forgotPassword",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "formData",
+            "name": "email",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "something goes wrong"
+                }
+              }
+            },
+            "description": "some error"
+          }
+        }
+      }
+    },
+    "/auth/forgotPassword/set": {
+      "post": {
+        "description": "Set new user's password",
+        "tags": ["Auth"],
+        "operationId": "setForgotPassword",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "formData",
+            "name": "password",
+            "required": true
+          },
+          {
+            "type": "string",
+            "in": "header",
+            "name": "access_token",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#definitions/User"
+            }
+          },
+          "400": {
+            "schema": {
+              "properties": {
+                "code": {
+                  "type": "number",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "something goes wrong"
+                }
+              }
+            },
+            "description": "some error"
+          }
+
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "62cfe911e2e42e92f018e414",
+          "description": "Mongo Id"
+        },
+        "name": {
+          "type": "string",
+          "example": "Olya",
+          "description": "User's name"
+        },
+        "age": {
+          "type": "number",
+          "example": 35,
+          "description": "User's age"
+        },
+        "email": {
+          "type": "string",
+          "example": "email@gmail.com",
+          "description": "User's email"
+        },
+        "phone": {
+          "type": "string",
+          "example": "+380123456789",
+          "description": "User's phone"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2022-07-14T09:59:45.223Z",
+          "format": "date-time",
+          "description": "Create date"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2022-07-14T09:59:45.223Z",
+          "description": "Update date"
+        }
+      }
+    }
+  }
+}
+

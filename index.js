@@ -1,5 +1,6 @@
 const express = require('express');
 const expressFileUpload = require('express-fileupload');
+const swaggerUi = require('swagger-ui-express');
 const mongoose = require('mongoose');
 const path = require("path");
 
@@ -7,6 +8,7 @@ require('dotenv').config({path: path.join(process.cwd(), 'environments', `${proc
 
 const {config} = require("./configs");
 const {userRouter, authRouter} = require("./routes");
+const swaggerDocument = require('./swagger.json');
 
 mongoose.connect(config.MONGO_URL)
 
@@ -20,6 +22,8 @@ app.use(expressFileUpload()) // ставимо до неї типізацію "@
 // дозволить нам загружати фотки. Прописується одразу над роутерами
 app.use('/auth', authRouter);
 app.use('/users', userRouter);
+
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('*', (req, res) => {
     res.status(404).json('Router not found');

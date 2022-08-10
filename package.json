@@ -23,6 +23,7 @@
     "nodemailer": "^6.7.6",
     "nodemailer-express-handlebars": "^5.0.0",
     "nodemon": "^2.0.19",
+    "swagger-ui-express": "^4.5.0",
     "twilio": "^3.78.0",
     "uuid": "^8.0.0"
   },
